@@ -27,7 +27,7 @@ class MainViewModel(private val numbersRepository: NumbersRepository) : ViewMode
         ++it.number
     }
 
-    private fun modifyNumber(block: (NumberUiState) -> Unit) {
+    private inline fun modifyNumber(block: (NumberUiState) -> Unit) {
         val oldValue = numberUiState.value.copy()
         block(oldValue)
         _numberUiState.value = oldValue
