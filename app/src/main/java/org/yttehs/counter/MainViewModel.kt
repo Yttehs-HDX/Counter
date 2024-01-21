@@ -23,9 +23,13 @@ class MainViewModel(private val numbersRepository: NumbersRepository) : ViewMode
         }
     }
 
-    fun increaseNumber() {
+    fun increaseNumber() = modifyNumber {
+        ++it.number
+    }
+
+    private fun modifyNumber(block: (NumberUiState) -> Unit) {
         val oldValue = numberUiState.value.copy()
-        ++oldValue.number
+        block(oldValue)
         _numberUiState.value = oldValue
         saveNumberEntity()
     }
