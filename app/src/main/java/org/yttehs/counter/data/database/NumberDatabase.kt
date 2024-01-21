@@ -12,11 +12,10 @@ abstract class NumberDatabase : RoomDatabase() {
     abstract fun numberDao(): NumberDao
 
     companion object {
-
         @Volatile
         private lateinit var Instance: NumberDatabase
 
-        fun getDatabase(context: Context) = if (Companion::Instance.isInitialized) Instance
+        fun getDatabase(context: Context): NumberDatabase = if (Companion::Instance.isInitialized) Instance
         else synchronized(this) {
             Instance = Room.databaseBuilder(
                 context,

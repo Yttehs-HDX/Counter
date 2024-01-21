@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.first
 import org.yttehs.counter.data.dao.NumberDao
 import org.yttehs.counter.data.model.NumberEntity
 
-class OfflineNumbersRepository(val numberDao: NumberDao) : NumbersRepository {
+class OfflineNumbersRepository(private val numberDao: NumberDao) : NumbersRepository {
     override suspend fun insertNumber(numberEntity: NumberEntity) = numberDao.insert(numberEntity)
 
     override suspend fun updateNumber(numberEntity: NumberEntity) = numberDao.update(numberEntity)

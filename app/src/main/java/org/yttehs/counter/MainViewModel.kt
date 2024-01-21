@@ -40,6 +40,6 @@ data class NumberUiState(
     var number: Long = 0L
 )
 
-fun NumberEntity.toNumberUiState() = NumberUiState(id = id, number = number)
+fun NumberEntity.toNumberUiState(): NumberUiState = NumberUiState(id = id, number = number)
 
-fun NumberUiState.toNumberEntity() = NumberEntity(id = id, number = number)
+fun NumberUiState.toNumberEntity(): NumberEntity = NumberEntity(id = id, number = number)
