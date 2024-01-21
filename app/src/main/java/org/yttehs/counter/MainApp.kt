@@ -1,24 +1,23 @@
 package org.yttehs.counter
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.navigationBarsHeight
+import com.google.accompanist.insets.statusBarsHeight
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import org.yttehs.counter.ui.NumberButtonView
 import org.yttehs.counter.ui.theme.CounterTheme
 
 @Composable
@@ -30,43 +29,60 @@ fun MainApp() {
                 .fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            NumberScreen()
-        }
-    }
-}
-
-@Composable
-fun NumberScreen(viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
-    Box(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxSize()
-            .background(
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = MaterialTheme.shapes.large
-            )
-    ) {
-        val numberUiState by viewModel.numberUiState.collectAsState()
-        Button(
-            modifier = Modifier
-                .padding(16.dp)
-                .align(Alignment.Center)
-                .wrapContentSize(),
-            onClick = {
-                viewModel.increaseNumber()
+            ProvideWindowInsets {
+                val systemUiController = rememberSystemUiController()
+                val colorScheme = MaterialTheme.colorScheme
+                SideEffect {
+                    systemUiController.apply {
+                        setSystemBarsColor(color = colorScheme.background)
+                    }
+                }
+                ScreenProvider()
             }
-        ) {
-            Text(
-                text = numberUiState.number.toString(),
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onPrimary
-            )
         }
     }
 }
 
-@Preview(name = "Default Preview")
 @Composable
-fun DefaultPreview() {
-    NumberScreen()
+fun ScreenProvider() {
+    MainScreen()
+}
+
+@Composable
+fun MainScreen(viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
+    Column(
+        Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .fillMaxSize(),
+    ) {
+        MainTopBar()
+        MainContent(viewModel = viewModel)
+        MainBottomNavigation()
+    }
+}
+
+@Composable
+fun MainTopBar() {
+    Spacer(
+        modifier = Modifier
+            .statusBarsHeight()
+            .fillMaxWidth()
+    )
+}
+
+@Composable
+fun MainContent(viewModel: MainViewModel) {
+    val numberUiState by viewModel.numberUiState.collectAsState()
+    NumberButtonView(numberUiState = numberUiState) {
+        viewModel.increaseNumber()
+    }
+}
+
+@Composable
+fun MainBottomNavigation() {
+    Spacer(
+        modifier = Modifier
+            .navigationBarsHeight()
+            .fillMaxWidth()
+    )
 }
