@@ -82,4 +82,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
     implementation("com.google.accompanist:accompanist-insets-ui:$accompanistVersion")
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.6")
 }

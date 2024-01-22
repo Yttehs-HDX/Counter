@@ -1,12 +1,15 @@
 package org.yttehs.counter.number.ui.component
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.yttehs.counter.NumberUiState
+import androidx.compose.ui.unit.dp
+import org.yttehs.counter.number.ui.NumberUiState
 
 @Composable
 fun NumberButton(
@@ -26,11 +29,14 @@ fun NumberButton(
     }
 }
 
-@Preview(name = "Default Preview")
+@Preview(name = "NumberButton")
 @Composable
-fun DefaultPreview() {
+fun NumberButtonPreview() {
     NumberButton(
         numberUiState = NumberUiState(0, 114514),
+        modifier = Modifier
+            .padding(8.dp)
+            .wrapContentSize(),
         onButtonClick = { }
     )
 }

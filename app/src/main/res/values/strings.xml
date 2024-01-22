@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Counter</string>
+    <string name="number_screen">Number</string>
 </resources>
