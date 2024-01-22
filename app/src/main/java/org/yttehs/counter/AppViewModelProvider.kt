@@ -15,5 +15,5 @@ object AppViewModelProvider {
     }
 }
 
-fun CreationExtras.mainApplication(): MainApplication =
-    (this[AndroidViewModelFactory.APPLICATION_KEY] as MainApplication)
+fun CreationExtras.mainApplication(): CounterApplication =
+    (this[AndroidViewModelFactory.APPLICATION_KEY] as CounterApplication)

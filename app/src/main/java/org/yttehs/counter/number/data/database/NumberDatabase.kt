@@ -1,11 +1,11 @@
-package org.yttehs.counter.data.database
+package org.yttehs.counter.number.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import org.yttehs.counter.data.dao.NumberDao
-import org.yttehs.counter.data.model.NumberEntity
+import org.yttehs.counter.number.data.dao.NumberDao
+import org.yttehs.counter.number.data.model.NumberEntity
 
 @Database(entities = [NumberEntity::class], version = 1, exportSchema = false)
 abstract class NumberDatabase : RoomDatabase() {

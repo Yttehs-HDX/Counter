@@ -1,4 +1,4 @@
-package org.yttehs.counter.data.model
+package org.yttehs.counter.number.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

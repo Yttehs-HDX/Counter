@@ -1,4 +1,4 @@
-package org.yttehs.counter
+package org.yttehs.counter.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,9 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsHeight
 import com.google.accompanist.insets.statusBarsHeight
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import org.yttehs.counter.ui.NumberButtonView
+import org.yttehs.counter.AppViewModelProvider
+import org.yttehs.counter.MainViewModel
+import org.yttehs.counter.number.ui.screen.NumberScreen
 import org.yttehs.counter.ui.theme.CounterTheme
 
 @Composable
@@ -31,21 +33,14 @@ fun MainApp() {
         ) {
             ProvideWindowInsets {
                 val systemUiController = rememberSystemUiController()
-                val colorScheme = MaterialTheme.colorScheme
+                val color = MaterialTheme.colorScheme.background
                 SideEffect {
-                    systemUiController.apply {
-                        setSystemBarsColor(color = colorScheme.background)
-                    }
+                    systemUiController.setSystemBarsColor(color = color)
                 }
-                ScreenProvider()
+                MainScreen()
             }
         }
     }
-}
-
-@Composable
-fun ScreenProvider() {
-    MainScreen()
 }
 
 @Composable
@@ -55,14 +50,14 @@ fun MainScreen(viewModel: MainViewModel = viewModel(factory = AppViewModelProvid
             .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
     ) {
-        MainTopBar()
+        TopBar()
         MainContent(viewModel = viewModel)
-        MainBottomNavigation()
+        BottomBar()
     }
 }
 
 @Composable
-fun MainTopBar() {
+fun TopBar() {
     Spacer(
         modifier = Modifier
             .statusBarsHeight()
@@ -73,13 +68,13 @@ fun MainTopBar() {
 @Composable
 fun MainContent(viewModel: MainViewModel) {
     val numberUiState by viewModel.numberUiState.collectAsState()
-    NumberButtonView(numberUiState = numberUiState) {
+    NumberScreen(numberUiState = numberUiState) {
         viewModel.increaseNumber()
     }
 }
 
 @Composable
-fun MainBottomNavigation() {
+fun BottomBar() {
     Spacer(
         modifier = Modifier
             .navigationBarsHeight()

@@ -1,7 +1,7 @@
-package org.yttehs.counter.data.repository
+package org.yttehs.counter.number.data.repository
 
 import kotlinx.coroutines.flow.Flow
-import org.yttehs.counter.data.model.NumberEntity
+import org.yttehs.counter.number.data.model.NumberEntity
 
 interface NumbersRepository {
     suspend fun insertNumber(numberEntity: NumberEntity)

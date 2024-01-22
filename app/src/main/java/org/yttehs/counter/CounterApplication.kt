@@ -1,10 +1,10 @@
 package org.yttehs.counter
 
 import android.app.Application
-import org.yttehs.counter.data.NumbersContainer
-import org.yttehs.counter.data.NumbersDataContainer
+import org.yttehs.counter.number.data.NumbersContainer
+import org.yttehs.counter.number.data.NumbersDataContainer
 
-class MainApplication : Application() {
+class CounterApplication : Application() {
     lateinit var container: NumbersContainer
 
     override fun onCreate() {

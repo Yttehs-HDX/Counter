@@ -1,9 +1,9 @@
-package org.yttehs.counter.data
+package org.yttehs.counter.number.data
 
 import android.content.Context
-import org.yttehs.counter.data.database.NumberDatabase
-import org.yttehs.counter.data.repository.NumbersRepository
-import org.yttehs.counter.data.repository.OfflineNumbersRepository
+import org.yttehs.counter.number.data.database.NumberDatabase
+import org.yttehs.counter.number.data.repository.NumbersRepository
+import org.yttehs.counter.number.data.repository.OfflineNumbersRepository
 
 interface NumbersContainer {
     val numbersRepository: NumbersRepository

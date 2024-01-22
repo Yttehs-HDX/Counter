@@ -1,4 +1,4 @@
-package org.yttehs.counter.ui
+package org.yttehs.counter.number.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import org.yttehs.counter.NumberUiState
 
 @Composable
-fun NumberButtonView(numberUiState: NumberUiState, onButtonClick: () -> Unit) {
+fun NumberButton(numberUiState: NumberUiState, onButtonClick: () -> Unit) {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -45,5 +45,5 @@ fun NumberButtonView(numberUiState: NumberUiState, onButtonClick: () -> Unit) {
 @Preview(name = "Default Preview")
 @Composable
 fun DefaultPreview() {
-    NumberButtonView(numberUiState = NumberUiState(0, 114514)) { }
+    NumberButton(numberUiState = NumberUiState(0, 114514)) { }
 }
