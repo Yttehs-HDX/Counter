@@ -11,7 +11,11 @@ import org.yttehs.counter.NumberUiState
 import org.yttehs.counter.number.ui.component.NumberButton
 
 @Composable
-fun NumberScreen(numberUiState: NumberUiState, modifier: Modifier = Modifier, onButtonClick: () -> Unit) {
+fun NumberScreen(
+    numberUiState: NumberUiState,
+    modifier: Modifier = Modifier,
+    onButtonClick: () -> Unit
+) {
     Box(
         modifier = modifier
     ) {

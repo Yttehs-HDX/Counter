@@ -9,7 +9,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.yttehs.counter.NumberUiState
 
 @Composable
-fun NumberButton(numberUiState: NumberUiState, modifier: Modifier = Modifier, onButtonClick: () -> Unit) {
+fun NumberButton(
+    numberUiState: NumberUiState,
+    modifier: Modifier = Modifier,
+    onButtonClick: () -> Unit
+) {
     Button(
         modifier = modifier,
         onClick = onButtonClick
@@ -25,5 +29,8 @@ fun NumberButton(numberUiState: NumberUiState, modifier: Modifier = Modifier, on
 @Preview(name = "Default Preview")
 @Composable
 fun DefaultPreview() {
-    NumberButton(numberUiState = NumberUiState(0, 114514)) { }
+    NumberButton(
+        numberUiState = NumberUiState(0, 114514),
+        onButtonClick = { }
+    )
 }

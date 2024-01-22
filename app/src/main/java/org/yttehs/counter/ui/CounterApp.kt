@@ -46,7 +46,9 @@ fun CounterApp() {
 }
 
 @Composable
-fun CounterScreen(viewModel: CounterViewModel = viewModel(factory = AppViewModelProvider.Factory)) {
+fun CounterScreen(
+    viewModel: CounterViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
     Column(
         Modifier
             .background(MaterialTheme.colorScheme.background)
@@ -68,7 +70,9 @@ fun TopBar() {
 }
 
 @Composable
-fun CounterContent(viewModel: CounterViewModel) {
+fun CounterContent(
+    viewModel: CounterViewModel
+) {
     val numberUiState by viewModel.numberUiState.collectAsState()
     NumberScreen(
         numberUiState = numberUiState,
