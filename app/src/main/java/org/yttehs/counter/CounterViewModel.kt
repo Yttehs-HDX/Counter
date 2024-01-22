@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import org.yttehs.counter.number.data.model.NumberEntity
 import org.yttehs.counter.number.data.repository.NumbersRepository
 
-class MainViewModel(private val numbersRepository: NumbersRepository) : ViewModel() {
+class CounterViewModel(private val numbersRepository: NumbersRepository) : ViewModel() {
     private val _numberUiState = MutableStateFlow(NumberUiState(0L))
     val numberUiState: StateFlow<NumberUiState>
         get() = _numberUiState

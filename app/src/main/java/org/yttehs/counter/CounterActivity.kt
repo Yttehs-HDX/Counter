@@ -3,13 +3,13 @@ package org.yttehs.counter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import org.yttehs.counter.ui.MainApp
+import org.yttehs.counter.ui.CounterApp
 
-class MainActivity : ComponentActivity() {
+class CounterActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainApp()
+            CounterApp()
         }
     }
 }
