@@ -1,8 +1,8 @@
 package org.yttehs.counter.ui.screen
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +23,7 @@ fun CounterScreen(
     startDestination: String,
     modifier: Modifier = Modifier,
     navBuilder: NavGraphBuilder.() -> Unit,
-    navItems: @Composable BoxScope.() -> Unit
+    navItems: @Composable RowScope.() -> Unit
 ) {
     Column(
         modifier = modifier

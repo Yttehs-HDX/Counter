@@ -1,11 +1,14 @@
 package org.yttehs.counter.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,6 +23,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.yttehs.counter.CounterDestination
+import org.yttehs.counter.about.AboutContent
 import org.yttehs.counter.number.ui.NumberContent
 import org.yttehs.counter.ui.component.CounterNavItem
 import org.yttehs.counter.ui.screen.CounterScreen
@@ -40,21 +44,35 @@ fun CounterContent(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(
-                            color = MaterialTheme.colorScheme.background,
-                            shape = MaterialTheme.shapes.large
+                            color = MaterialTheme.colorScheme.background
+                        )
+                )
+            }
+            composable(route = CounterDestination.AboutScreen.route) {
+                AboutContent(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize()
+                        .background(
+                            color = MaterialTheme.colorScheme.background
                         )
                 )
             }
         },
         navItems = {
             var isNumberScreenChosen by remember { mutableStateOf(true) }
+            var isAboutScreenChosen by remember { mutableStateOf(false) }
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
+            )
             CounterNavItem(
-                text = "Home",
+                text = CounterDestination.NumberScreen.description,
                 uncheckedIcon = Icons.Outlined.Home,
                 checkedIcon = Icons.Default.Home,
                 isChecked = isNumberScreenChosen,
                 modifier = Modifier
-                    .align(Alignment.Center)
+                    .align(Alignment.CenterVertically)
                     .padding(
                         top = 8.dp,
                         bottom = 0.dp,
@@ -65,8 +83,38 @@ fun CounterContent(
                     if (!isNumberScreenChosen) {
                         navController.navigateSingleTopTo(CounterDestination.NumberScreen.route)
                         isNumberScreenChosen = !isNumberScreenChosen
+                        isAboutScreenChosen = !isAboutScreenChosen
                     }
                 }
+            )
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
+            )
+            CounterNavItem(
+                text = CounterDestination.AboutScreen.description,
+                uncheckedIcon = Icons.Outlined.Info,
+                checkedIcon = Icons.Default.Info,
+                isChecked = isAboutScreenChosen,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(
+                        top = 8.dp,
+                        bottom = 0.dp,
+                        start = 8.dp,
+                        end = 8.dp
+                    ),
+                onChecked = {
+                    if (!isAboutScreenChosen) {
+                        navController.navigateSingleTopTo(CounterDestination.AboutScreen.route)
+                        isAboutScreenChosen = !isAboutScreenChosen
+                        isNumberScreenChosen = !isNumberScreenChosen
+                    }
+                }
+            )
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
             )
         }
     )

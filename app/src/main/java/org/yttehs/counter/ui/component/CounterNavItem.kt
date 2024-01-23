@@ -22,7 +22,7 @@ fun CounterNavItem(
     modifier: Modifier = Modifier,
     text: String,
     uncheckedColor: Color = MaterialTheme.colorScheme.inverseOnSurface,
-    checkedColor: Color = MaterialTheme.colorScheme.inversePrimary,
+    checkedColor: Color = MaterialTheme.colorScheme.secondaryContainer,
     uncheckedIcon: ImageVector,
     checkedIcon: ImageVector,
     isChecked: Boolean = false,

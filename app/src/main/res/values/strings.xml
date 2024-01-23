@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Counter</string>
-    <string name="number_screen">Number</string>
+    <string name="number_screen_route">Number</string>
+    <string name="number_screen_description">Home</string>
+    <string name="about_screen_route">About</string>
+    <string name="about_screen_description">About</string>
+    <string name="version_code">v4.0.0</string>
 </resources>
