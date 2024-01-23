@@ -7,7 +7,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
-import com.google.accompanist.insets.ProvideWindowInsets
+import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.yttehs.counter.ui.CounterContent
 import org.yttehs.counter.ui.theme.CounterTheme
@@ -21,18 +21,29 @@ fun CounterApp() {
                 .fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ProvideWindowInsets {
-                val systemUiController = rememberSystemUiController()
-                val color = MaterialTheme.colorScheme.background
-                SideEffect {
-                    systemUiController.setSystemBarsColor(color = color)
-                }
-                CounterContent(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.background)
-                        .fillMaxSize()
-                )
-            }
+            SystemBar(
+                statusBarColor = MaterialTheme.colorScheme.background,
+                navigationBarColor = MaterialTheme.colorScheme.inverseOnSurface
+            )
+            CounterContent(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+                    .fillMaxSize()
+            )
+        }
+    }
+}
+
+@Composable
+fun SystemBar(
+    statusBarColor: Color,
+    navigationBarColor: Color
+) {
+    val systemUiController = rememberSystemUiController()
+    SideEffect {
+        systemUiController.apply {
+            setStatusBarColor(color = statusBarColor)
+            setNavigationBarColor(color = navigationBarColor)
         }
     }
 }
