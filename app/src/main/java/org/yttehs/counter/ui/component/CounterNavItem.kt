@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -70,6 +71,10 @@ fun CounterNavItem(
                         unselectedIcon
                     },
                     contentDescription = text,
+                    colorFilter = ColorFilter
+                        .tint(
+                            color = MaterialTheme.colorScheme.onSurface
+                        ),
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                 )

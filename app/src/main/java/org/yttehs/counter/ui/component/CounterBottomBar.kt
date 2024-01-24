@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -34,10 +34,10 @@ fun CounterBottomBar(
 
 @Preview(name = "CounterBottomBar")
 @Composable
-fun CounterBottomNavigationPreview() {
+fun CounterBottomBarPreview() {
     CounterBottomBar(
         modifier = Modifier
-            .height(80.dp)
+            .wrapContentHeight()
             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
             .background(
                 color = MaterialTheme.colorScheme.inverseOnSurface
@@ -54,7 +54,7 @@ fun CounterBottomNavigationPreview() {
             isSelected = true,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(16.dp),
+                .padding(8.dp),
             onSelect = { }
         )
         Spacer(
@@ -68,7 +68,7 @@ fun CounterBottomNavigationPreview() {
             isSelected = true,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(16.dp),
+                .padding(8.dp),
             onSelect = { }
         )
         Spacer(

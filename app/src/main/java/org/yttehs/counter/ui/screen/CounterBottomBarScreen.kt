@@ -31,12 +31,7 @@ fun CounterBottomBarScreen(
                 isSelected = destination.route == startDestination,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(
-                        top = 8.dp,
-                        bottom = 0.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    ),
+                    .padding(8.dp),
                 onSelect = {
                     onSelect(destination)
                 }
