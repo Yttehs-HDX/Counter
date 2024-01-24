@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CounterBottomNavigation(
+fun CounterBottomBar(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -35,7 +35,7 @@ fun CounterBottomNavigation(
 @Preview(name = "CounterBottomBar")
 @Composable
 fun CounterBottomNavigationPreview() {
-    CounterBottomNavigation(
+    CounterBottomBar(
         modifier = Modifier
             .height(80.dp)
             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
@@ -49,13 +49,13 @@ fun CounterBottomNavigationPreview() {
         )
         CounterNavItem(
             text = "Home",
-            uncheckedIcon = Icons.Outlined.Home,
-            checkedIcon = Icons.Default.Home,
-            isChecked = true,
+            unselectedIcon = Icons.Outlined.Home,
+            selectedIcon = Icons.Default.Home,
+            isSelected = true,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(16.dp),
-            onChecked = { }
+            onSelect = { }
         )
         Spacer(
             modifier = Modifier
@@ -63,13 +63,13 @@ fun CounterBottomNavigationPreview() {
         )
         CounterNavItem(
             text = "About",
-            uncheckedIcon = Icons.Outlined.Info,
-            checkedIcon = Icons.Default.Info,
-            isChecked = true,
+            unselectedIcon = Icons.Outlined.Info,
+            selectedIcon = Icons.Default.Info,
+            isSelected = true,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
                 .padding(16.dp),
-            onChecked = { }
+            onSelect = { }
         )
         Spacer(
             modifier = Modifier

@@ -1,5 +1,9 @@
 package org.yttehs.counter.ui.component
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,12 +26,12 @@ import androidx.compose.ui.tooling.preview.Preview
 fun CounterNavItem(
     modifier: Modifier = Modifier,
     text: String,
-    uncheckedColor: Color = MaterialTheme.colorScheme.inverseOnSurface,
-    checkedColor: Color = MaterialTheme.colorScheme.secondaryContainer,
-    uncheckedIcon: ImageVector,
-    checkedIcon: ImageVector,
-    isChecked: Boolean = false,
-    onChecked: () -> Unit,
+    unselectedColor: Color = MaterialTheme.colorScheme.inverseOnSurface,
+    selectedColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    unselectedIcon: ImageVector,
+    selectedIcon: ImageVector,
+    isSelected: Boolean = false,
+    onSelect: () -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -34,31 +39,42 @@ fun CounterNavItem(
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
+                .animateContentSize(
+                    animationSpec = tween(
+                        durationMillis = 500,
+                        easing = LinearOutSlowInEasing
+                    )
+                )
         ) {
+            val containerColor by animateColorAsState(
+                targetValue = if (isSelected) selectedColor
+                else unselectedColor,
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = LinearOutSlowInEasing
+                ),
+                label = "ButtonColorAnimation"
+            )
             Button(
-                onClick = onChecked,
+                onClick = onSelect,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isChecked) {
-                        checkedColor
-                    } else {
-                        uncheckedColor
-                    }
+                    containerColor = containerColor
                 ),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
             ) {
                 Image(
-                    imageVector = if (isChecked) {
-                        checkedIcon
+                    imageVector = if (isSelected) {
+                        selectedIcon
                     } else {
-                        uncheckedIcon
+                        unselectedIcon
                     },
                     contentDescription = text,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                 )
             }
-            if (isChecked) {
+            if (isSelected) {
                 Text(
                     text = text,
                     modifier = Modifier
@@ -74,9 +90,9 @@ fun CounterNavItem(
 fun CounterNavItemPreView() {
     CounterNavItem(
         text = "Home",
-        uncheckedIcon = Icons.Outlined.Home,
-        checkedIcon = Icons.Default.Home,
-        isChecked = true,
-        onChecked = { }
+        unselectedIcon = Icons.Outlined.Home,
+        selectedIcon = Icons.Default.Home,
+        isSelected = true,
+        onSelect = { }
     )
 }

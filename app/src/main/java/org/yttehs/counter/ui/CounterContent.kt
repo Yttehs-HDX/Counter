@@ -1,132 +1,48 @@
 package org.yttehs.counter.ui
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import org.yttehs.counter.CounterDestination
-import org.yttehs.counter.about.AboutContent
-import org.yttehs.counter.number.ui.NumberContent
-import org.yttehs.counter.ui.component.CounterNavItem
-import org.yttehs.counter.ui.screen.CounterScreen
 
 @Composable
 fun CounterContent(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    startDestination: String
 ) {
-    val navController = rememberNavController()
-    val startDestination = CounterDestination.NumberScreen.route
-    CounterScreen(
+    NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = modifier,
-        navBuilder = {
-            composable(route = CounterDestination.NumberScreen.route) {
-                NumberContent(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            color = MaterialTheme.colorScheme.background
-                        )
-                )
-            }
-            composable(route = CounterDestination.AboutScreen.route) {
-                AboutContent(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize()
-                        .background(
-                            color = MaterialTheme.colorScheme.background
-                        )
-                )
-            }
+        enterTransition = {
+            fadeIn(
+                animationSpec = tween(1000)
+            ) + slideIntoContainer(
+                initialOffset = { fullSize -> fullSize / 4 },
+                animationSpec = tween(500),
+                towards = AnimatedContentTransitionScope.SlideDirection.Up
+            )
         },
-        navItems = {
-            var isNumberScreenChosen by remember { mutableStateOf(true) }
-            var isAboutScreenChosen by remember { mutableStateOf(false) }
-            Spacer(
-                modifier = Modifier
-                    .weight(1f)
-            )
-            CounterNavItem(
-                text = CounterDestination.NumberScreen.description,
-                uncheckedIcon = Icons.Outlined.Home,
-                checkedIcon = Icons.Default.Home,
-                isChecked = isNumberScreenChosen,
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(
-                        top = 8.dp,
-                        bottom = 0.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    ),
-                onChecked = {
-                    if (!isNumberScreenChosen) {
-                        navController.navigateSingleTopTo(CounterDestination.NumberScreen.route)
-                        isNumberScreenChosen = !isNumberScreenChosen
-                        isAboutScreenChosen = !isAboutScreenChosen
-                    }
-                }
-            )
-            Spacer(
-                modifier = Modifier
-                    .weight(1f)
-            )
-            CounterNavItem(
-                text = CounterDestination.AboutScreen.description,
-                uncheckedIcon = Icons.Outlined.Info,
-                checkedIcon = Icons.Default.Info,
-                isChecked = isAboutScreenChosen,
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(
-                        top = 8.dp,
-                        bottom = 0.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    ),
-                onChecked = {
-                    if (!isAboutScreenChosen) {
-                        navController.navigateSingleTopTo(CounterDestination.AboutScreen.route)
-                        isAboutScreenChosen = !isAboutScreenChosen
-                        isNumberScreenChosen = !isNumberScreenChosen
-                    }
-                }
-            )
-            Spacer(
-                modifier = Modifier
-                    .weight(1f)
-            )
+        modifier = modifier
+    ) {
+        for (destination in CounterDestination.AllDestinations) {
+            composable(route = destination.route) {
+                destination.Content(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(
+                            color = MaterialTheme.colorScheme.background
+                        )
+                )
+            }
         }
-    )
-}
-
-fun NavHostController.navigateSingleTopTo(route: String) =
-    this.navigate(route) {
-        popUpTo(
-            this@navigateSingleTopTo.graph.findStartDestination().id
-        ) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
     }
+}

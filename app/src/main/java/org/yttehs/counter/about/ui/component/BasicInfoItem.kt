@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -30,6 +31,9 @@ fun BasicInfoItem(
     Row(
         modifier = modifier
     ) {
+        Spacer(
+            modifier = Modifier.width(8.dp)
+        )
         Image(
             imageVector= icon,
             contentDescription = text,
@@ -39,14 +43,20 @@ fun BasicInfoItem(
                 .align(Alignment.CenterVertically)
         )
         Spacer(
-            modifier = Modifier.width(16.dp)
+            modifier = Modifier.width(8.dp)
         )
         Text(
             text = text,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Start,
             modifier = Modifier
+                .padding(16.dp)
+                .weight(1f)
                 .align(Alignment.CenterVertically)
+        )
+        Spacer(
+            modifier = Modifier.width(8.dp)
         )
     }
 }
