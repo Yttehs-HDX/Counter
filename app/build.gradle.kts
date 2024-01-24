@@ -12,7 +12,7 @@ android {
         applicationId = "org.yttehs.counter"
         minSdk = 24
         targetSdk = 34
-        versionCode = 2
+        versionCode = 3
         versionName = project.file("src/main/res/values/strings.xml").readText()
             .substringAfter("<string name=\"version_name\">")
             .substringBefore("</string>")
