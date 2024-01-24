@@ -12,8 +12,11 @@ android {
         applicationId = "org.yttehs.counter"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "4.1.0"
+        versionCode = 2
+        versionName = project.file("src/main/res/values/strings.xml").readText()
+            .substringAfter("<string name=\"version_name\">")
+            .substringBefore("</string>")
+            .trim()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

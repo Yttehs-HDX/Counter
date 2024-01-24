@@ -4,5 +4,5 @@
     <string name="number_screen_description">Home</string>
     <string name="about_screen_route">About</string>
     <string name="about_screen_description">About</string>
-    <string name="version_code">v4.0.0</string>
+    <string name="version_name">4.1.0</string>
 </resources>

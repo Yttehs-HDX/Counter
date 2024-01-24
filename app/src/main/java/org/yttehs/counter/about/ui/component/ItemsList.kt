@@ -39,7 +39,7 @@ fun ItemsList(
                     shape = RoundedCornerShape(16.dp)
                 ),
             icon = Icons.Filled.Info,
-            text = stringResource(id = R.string.version_code)
+            text = "v ${stringResource(id = R.string.version_name)}"
         )
     }
 }
