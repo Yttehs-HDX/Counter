@@ -4,13 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +33,7 @@ fun CounterApp() {
     CounterTheme {
         SystemBar(
             statusBarColor = MaterialTheme.colorScheme.background,
-            navigationBarColor = MaterialTheme.colorScheme.inverseOnSurface
+            navigationColor = MaterialTheme.colorScheme.inverseOnSurface
         )
         Surface(
             modifier = Modifier
@@ -42,7 +44,10 @@ fun CounterApp() {
             var selectedDestination by remember { mutableStateOf(CounterDestination.NumberContent.route) }
             Scaffold(
                 topBar = {
-                    CounterTopBar()
+                    CounterTopBar(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
                 },
                 bottomBar = {
                     CounterBottomBarContent(
@@ -50,6 +55,8 @@ fun CounterApp() {
                         startDestination = selectedDestination,
                         modifier = Modifier
                             .wrapContentHeight()
+                            .systemBarsPadding()
+                            .systemGestureExclusion()
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
                             .background(
@@ -73,16 +80,17 @@ fun CounterApp() {
     }
 }
 
+@Suppress("DEPRECATION")
 @Composable
-private fun SystemBar(
+fun SystemBar(
     statusBarColor: Color,
-    navigationBarColor: Color
+    navigationColor: Color
 ) {
     val systemUiController = rememberSystemUiController()
-    SideEffect {
+    LaunchedEffect(Unit) {
         systemUiController.apply {
-            setStatusBarColor(color = statusBarColor)
-            setNavigationBarColor(color = navigationBarColor)
+            setStatusBarColor(statusBarColor)
+            setNavigationBarColor(navigationColor)
         }
     }
 }
