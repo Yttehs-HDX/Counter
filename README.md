@@ -1,4 +1,6 @@
-# About Counter
+# [Deprecated] About Counter
+
+## Move to [Yttehs-HDX/KMP-Counter](https://github.com/Yttehs-HDX/KMP-Counter)
 
 ### 😆😆😆
 
